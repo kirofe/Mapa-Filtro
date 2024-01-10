@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const highlightStyle = new Style({
       fill: new Fill({
-        color: '#EEE',
+        color: 'blue',
       }),
       stroke: new Stroke({
         color: '#3399CC',
@@ -39,19 +39,22 @@ export class AppComponent implements OnInit {
     });
     
     const vector = new VectorLayer({
-      background: 'white',
+      // background: '#1a2b39',
       source: new VectorSource({
-        url: 'https://openlayers.org/data/vector/us-states.json',
+        // url: 'assets/geojs-100-mun.json',
+        url: 'assets/geojs-41-mun.json',
         format: new GeoJSON(),
       }),
     });
     
     const map = new Map({
-      layers: [vector],
+      layers: [new TileLayer({
+        source: new OSM(),
+      }), vector],
       target: 'map',
       view: new View({
-        center: fromLonLat([-100, 38.5]),
-        zoom: 4,
+        center: fromLonLat([-50, -24.5]),
+        zoom: 8,
         multiWorld: true,
       }),
     });
@@ -62,14 +65,15 @@ export class AppComponent implements OnInit {
 
     map.on('singleclick', function (e) {
       console.log(selected)
-      map.forEachFeatureAtPixel(e.pixel, function (f) {
-        const selIndex = selected.indexOf(f);
+      map.forEachFeatureAtPixel(e.pixel, function (feature) {
+        const selIndex = selected.indexOf(feature);
         if (selIndex < 0) {
-          selected.push(f);
-          (f as Feature).setStyle(highlightStyle);
+          selected.push(feature);
+          console.log((feature as Feature).getProperties());
+          (feature as Feature).setStyle(highlightStyle);
         } else {
           selected.splice(selIndex, 1);
-          (f as Feature).setStyle(undefined);
+          (feature as Feature).setStyle(undefined);
         }
       });
 
