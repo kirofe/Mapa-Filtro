@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "rbush"
+            ],
             "outputPath": "dist/mapa-filtro",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,9 +33,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ol/ol.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/leaflet/dist/leaflet.js"
+            ]
           },
           "configurations": {
             "production": {

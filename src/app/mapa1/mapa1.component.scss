@@ -1,0 +1,50 @@
+#map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#status {
+  padding: 10px 10px 10px 10px;
+  font-size: 20px
+}
+
+.grid-container {    
+  display: grid;
+  grid-template-columns: 80% 20%;
+  // grid-template-rows: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.grid-header { 
+  grid-row-start: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.grid-item {
+  grid-column-start: 1;
+}
+.grid-item2 {    
+  grid-column-start: 2;
+}
+
+.ol-popup {
+  display: flex;
+  flex-wrap: wrap;
+  background:rgba(255,255,255, 0.5);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.ol-popup-closer {
+  width: 100%;
+  font-size: 12px;
+  text-align: end;
+  text-decoration: none;
+}
+
+#popup-content {
+  opacity: 1;
+}
